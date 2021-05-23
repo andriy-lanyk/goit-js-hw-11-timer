@@ -1,9 +1,40 @@
 class CountdownTimer {
     constructor({ selector, targetDate }) {
-        this.element = this.getElement(selector);
+        this.selector = selector;
         this.targetDate = targetDate;
+        this.createHTML();
+        this.element = this.getElement(selector);
         this.start();
     }
+    
+    createHTML() {
+        const year = this.selector.slice(this.selector.length-1)
+    const timerHTML =
+        `<h1 id="headline">Countdown to my birthday on 202${year} year:</h1>
+        
+        <div class="timer" id="${this.selector.slice(1)}">
+      <div class="field">
+        <span class="value" data-value="days">11</span>
+        <span class="label">Days</span>
+      </div>
+      
+      <div class="field">
+        <span class="value" data-value="hours">11</span>
+        <span class="label">Hours</span>
+      </div>
+      
+      <div class="field">
+        <span class="value" data-value="mins">11</span>
+        <span class="label">Minutes</span>
+      </div>
+      
+      <div class="field">
+        <span class="value" data-value="secs">11</span>
+        <span class="label">Seconds</span>
+      </div>
+    </div>`;
+    document.body.insertAdjacentHTML('beforeend', timerHTML);
+};
 
     getElement(id) {
         const ref = {
@@ -46,4 +77,9 @@ class CountdownTimer {
 const timer = new CountdownTimer({
   selector: '#timer-1',
   targetDate: new Date('Oct 31, 2021'),
+});
+
+const timer2 = new CountdownTimer({
+  selector: '#timer-2',
+  targetDate: new Date('Oct 31, 2022'),
 });
